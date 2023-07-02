@@ -1,0 +1,4 @@
+﻿{
+  "DataProvider": "sqlserver",
+  "DataConnectionString": "Data Source=localhost;Initial Catalog=TestApi;User ID=sa;Password=local456*;"
+}
