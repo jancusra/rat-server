@@ -16,6 +16,6 @@ namespace Rat.Contracts
 
         public string Icon { get; set; }
 
-        public IList<MenuItemDto> ChildMenuItems { get; set; }
+        public List<MenuItemDto> ChildMenuItems { get; set; }
     }
 }

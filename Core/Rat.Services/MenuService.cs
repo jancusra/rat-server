@@ -26,8 +26,6 @@ namespace Rat.Services
         public virtual async Task<IList<MenuItemDto>> GetAdminMenuItemsAsync()
         {
             var allAdminMenuItems = await GetAllMenuItemsByTypeAsync(MenuType.Admin);
-            var childMenuItems = allAdminMenuItems.Where(x => x.ParentMenuItemId > default(int))
-                .OrderByDescending(x => x.ItemOrder).ToList();
             var result = new List<MenuItemDto>();
 
             result.AddRange(allAdminMenuItems.Where(x => x.ParentMenuItemId == default(int))
@@ -37,18 +35,19 @@ namespace Rat.Services
 
             foreach (var menuItem in result)
             {
-                for (int i = childMenuItems.Count - 1; i >= 0; i--)
-                {
-                    if (childMenuItems[i].ParentMenuItemId == menuItem.Id)
-                    {
-                        menuItem.ChildMenuItems.Add(childMenuItems[i].ToDtoModel(childMenuItems[i].SystemName));
-
-                        childMenuItems.RemoveAt(i);
-                    }
-                }
+                menuItem.ChildMenuItems.AddRange(GetChildMenuItemsByParentId(allAdminMenuItems, menuItem.Id));
             }
 
             return result;
+        }
+
+        private IList<MenuItemDto> GetChildMenuItemsByParentId(
+            IList<MenuItem> allMenuItems,
+            int parentMenuItemId)
+        {
+            return allMenuItems.Where(x => x.ParentMenuItemId == parentMenuItemId)
+                .OrderBy(x => x.ItemOrder)
+                .Select(x => x.ToDtoModel(x.SystemName)).ToList();
         }
     }
 }
