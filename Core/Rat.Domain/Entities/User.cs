@@ -5,7 +5,7 @@ using Rat.Domain.EntityTypes;
 namespace Rat.Domain.Entities
 {
     [CommonAccess]
-    public partial class User : TableEntity, IAuditable//, ISoftDelete
+    public partial class User : TableEntity, IAuditable, ISoftDelete
     {
         public User()
         {

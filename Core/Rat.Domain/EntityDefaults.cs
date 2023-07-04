@@ -10,6 +10,10 @@
 
         public const int MaxIpAddressLength = 46;
 
+        public const int MaxLanguageCultureCodeLength = 12;
+
+        public const int MaxTwoLetterLength = 2;
+
         public const string MappingTableNamePostfix = "Map";
     }
 }

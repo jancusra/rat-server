@@ -47,6 +47,8 @@ namespace Rat.Api
             services.AddDistributedMemoryCache();
 
             services.AddScoped<IHashingService, HashingService>();
+            services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<ILocalizationService, LocalizationService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEntityService, EntityService>();
