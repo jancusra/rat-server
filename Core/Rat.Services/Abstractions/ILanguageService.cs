@@ -6,6 +6,8 @@ namespace Rat.Services
 {
     public partial interface ILanguageService
     {
+        Task<Language> GetDefaultLanguageAsync();
+
         Task<IList<Language>> GetAllAsync();
     }
 }

@@ -17,10 +17,9 @@ namespace Rat.Endpoint.Controllers
             _localizationService = localizationService;
         }
 
-        [HttpPost]
-        public virtual async Task<IActionResult> Get()
+        public virtual async Task<IActionResult> GetByLanguageId(int languageId)
         {
-            var locales = (await _localizationService.GetByLanguageIdAsync(1))
+            var locales = (await _localizationService.GetByLanguageIdAsync(languageId))
                 .ToDictionary(k => k.Name, v => v.Value);
 
             return Ok(locales);

@@ -11,13 +11,27 @@ namespace Rat.Services
     {
         private readonly IRepository _repository;
 
+        private readonly ILanguageService _languageService;
+
         public LocalizationService(
-            IRepository repository)
+            IRepository repository,
+            ILanguageService languageService)
         {
             _repository = repository;
+            _languageService = languageService;
         }
 
         public virtual async Task<IList<Localization>> GetByLanguageIdAsync(int languageId)
-            => await _repository.Table<Localization>().Where(x => x.LanguageId == languageId).ToListAsync();
+        {
+            if (languageId > default(int))
+            {
+                return await _repository.Table<Localization>().Where(x => x.LanguageId == languageId).ToListAsync();
+            }
+            else
+            {
+                var language = _languageService.GetDefaultLanguageAsync();
+                return await _repository.Table<Localization>().Where(x => x.LanguageId == language.Id).ToListAsync();
+            }
+        }
     }
 }

@@ -13,16 +13,19 @@ namespace Rat.Endpoint.Controllers
     [Route("api/[controller]/[action]")]
     public partial class UserController : ControllerBase
     {
+        private readonly ILanguageService _languageService;
+
         private readonly IUserService _userService;
 
         public UserController(
+            ILanguageService languageService,
             IUserService userService)
         {
+            _languageService = languageService;
             _userService = userService;
         }
 
-        [HttpPost]
-        public virtual IActionResult GetCurrentUserData()
+        public virtual async Task<IActionResult> GetCurrentUserData()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             var emailClaim = identity.FindFirst(ClaimTypes.Email);
@@ -30,7 +33,8 @@ namespace Rat.Endpoint.Controllers
 
             return Ok(new { 
                 Email = emailClaim != null ? emailClaim.Value : string.Empty,
-                IsAdmin = isAdminClaim != null ? Convert.ToBoolean(isAdminClaim.Value) : false
+                IsAdmin = isAdminClaim != null ? Convert.ToBoolean(isAdminClaim.Value) : false,
+                Languages = await _languageService.GetAllAsync()
             });
         }
 
@@ -43,7 +47,6 @@ namespace Rat.Endpoint.Controllers
         }
 
         [Authorize]
-        [HttpPost]
         public virtual async Task<IActionResult> GetAll()
         {
             var data = await _userService.GetAllAsync();
