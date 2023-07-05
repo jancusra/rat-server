@@ -1,6 +1,6 @@
 # Rat.Api - web server API template
 
-[Here is client app for server](https://github.com/jancusra/rat-client)
+[Here is client app for this server](https://github.com/jancusra/rat-client)
 
 * Onion architecture
 * Simple stateless API system
