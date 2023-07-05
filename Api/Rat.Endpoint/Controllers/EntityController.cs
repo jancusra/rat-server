@@ -35,7 +35,8 @@ namespace Rat.Endpoint.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> SaveEntity([FromBody]SaveEntityModel model)
         {
-            var validationResult = _entityValidationService.ValidateCommonEntity(model.EntityName, model.Data);
+            var validationResult = await _entityValidationService.ValidateCommonEntityAsync(
+                model.EntityName, model.Data, model.LanguageId);
 
             if (validationResult.Count > default(int))
             {
@@ -76,6 +77,7 @@ namespace Rat.Endpoint.Controllers
             }
 
             public string EntityName { get; set; }
+            public int LanguageId { get; set; }
 
             [JsonConverter(typeof(DictionaryStringObjectJsonConverter))]
             public Dictionary<string, object> Data { get; set; }

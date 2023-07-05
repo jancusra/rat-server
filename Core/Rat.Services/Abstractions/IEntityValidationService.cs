@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Rat.Contracts;
 
 namespace Rat.Services
 {
     public partial interface IEntityValidationService
     {
-        IList<ValidationEntryResult> ValidateCommonEntity(string entityName, Dictionary<string, object> data);
+        Task<IList<ValidationEntryResult>> ValidateCommonEntityAsync(
+            string entityName, Dictionary<string, object> data, int languageId);
     }
 }

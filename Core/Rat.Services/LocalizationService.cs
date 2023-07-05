@@ -21,16 +21,36 @@ namespace Rat.Services
             _languageService = languageService;
         }
 
-        public virtual async Task<IList<Localization>> GetByLanguageIdAsync(int languageId)
+        public virtual async Task<string> GetLocaleAsync(int languageId, string localName)
         {
-            if (languageId > default(int))
+            var localeValue = await _repository.Table<Localization>()
+                .FirstOrDefaultAsync(x => x.LanguageId == languageId && x.Name == localName);
+
+            if (localeValue == null)
             {
-                return await _repository.Table<Localization>().Where(x => x.LanguageId == languageId).ToListAsync();
+                return localName;
             }
             else
             {
-                var language = _languageService.GetDefaultLanguageAsync();
-                return await _repository.Table<Localization>().Where(x => x.LanguageId == language.Id).ToListAsync();
+                return localeValue.Value;
+            }
+        }
+
+        public virtual async Task<IList<Localization>> GetByLanguageIdAsync(int languageId)
+        {
+            var langId = await GetLanguageIdAsync(languageId);
+            return await _repository.Table<Localization>().Where(x => x.LanguageId == langId).ToListAsync();
+        }
+
+        private async Task<int> GetLanguageIdAsync(int languageId)
+        {
+            if (languageId > default(int))
+            {
+                return languageId;
+            }
+            else
+            {
+                return (await _languageService.GetDefaultLanguageAsync()).Id;
             }
         }
     }

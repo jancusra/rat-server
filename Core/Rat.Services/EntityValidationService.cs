@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Rat.Contracts;
 using Rat.Domain;
 using Rat.Domain.EntityAttributes;
@@ -12,13 +13,18 @@ namespace Rat.Services
     {
         private readonly IEntityService _entityService;
 
+        private readonly ILocalizationService _localizationService;
+
         public EntityValidationService(
-            IEntityService entityService)
+            IEntityService entityService,
+            ILocalizationService localizationService)
         {
             _entityService = entityService;
+            _localizationService = localizationService;
         }
 
-        public virtual IList<ValidationEntryResult> ValidateCommonEntity(string entityName, Dictionary<string, object> data)
+        public virtual async Task<IList<ValidationEntryResult>> ValidateCommonEntityAsync(
+            string entityName, Dictionary<string, object> data, int languageId)
         {
             var validationEntries = new List<ValidationEntryResult>();
             var entityType = _entityService.GetTableEntityTypeByName(entityName);
@@ -42,7 +48,9 @@ namespace Rat.Services
                     {
                         validationEntries.Add(new ValidationEntryResult {
                             FieldName = entityEntry.Key,
-                            Message = $"Field {entityEntry.Key} is required!"
+                            Message = string.Format(
+                                await _localizationService.GetLocaleAsync(languageId, "RequiredField"),
+                                await _localizationService.GetLocaleAsync(languageId, entityEntry.Key))
                         });
                     }
                 }
