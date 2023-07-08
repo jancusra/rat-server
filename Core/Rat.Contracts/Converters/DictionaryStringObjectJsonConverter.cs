@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Rat.Endpoint.Converters
+namespace Rat.Contracts.Converters
 {
     public class DictionaryStringObjectJsonConverter : JsonConverter<Dictionary<string, object>>
     {

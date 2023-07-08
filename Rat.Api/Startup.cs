@@ -83,7 +83,7 @@ namespace Rat.Api
 
             app.UseHttpsRedirection();
             app.UseMiddleware<TokenManagerMiddleware>();
-            //app.UseMiddleware<ErrorWrappingMiddleware>();
+            app.UseMiddleware<ErrorWrappingMiddleware>();
 
             app.UseRouting();
 

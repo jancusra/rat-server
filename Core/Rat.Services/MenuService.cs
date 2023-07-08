@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using LinqToDB;
-using Rat.Contracts;
+using Rat.Contracts.Models;
 using Rat.Domain;
 using Rat.Domain.Entities;
 using Rat.Domain.Types;

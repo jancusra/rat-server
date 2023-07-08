@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Text.Json.Serialization;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Rat.Contracts.Models.Entity;
 using Rat.Services;
-using Rat.Endpoint.Converters;
 
 namespace Rat.Endpoint.Controllers
 {
@@ -26,14 +24,14 @@ namespace Rat.Endpoint.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> GetEntity([FromBody]GetEntityModel model)
+        public virtual async Task<IActionResult> GetEntity([FromBody]GetEntityDto model)
         {
             var data = await _entityService.GetEntityAsync(model.EntityName, model.Id);
             return Ok(data);
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> SaveEntity([FromBody]SaveEntityModel model)
+        public virtual async Task<IActionResult> SaveEntity([FromBody]SaveEntityDto model)
         {
             var validationResult = await _entityValidationService.ValidateCommonEntityAsync(
                 model.EntityName, model.Data, model.LanguageId);
@@ -50,48 +48,17 @@ namespace Rat.Endpoint.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> DeleteEntity([FromBody]DeleteEntityModel model)
+        public virtual async Task<IActionResult> DeleteEntity([FromBody]DeleteEntityDto model)
         {
             await _entityService.DeleteEntityAsync(model.EntityName, model.Id);
             return Ok(true);
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> GetAllToTable([FromBody]GetAllModel model)
+        public virtual async Task<IActionResult> GetAllToTable([FromBody]GetAllDto model)
         {
             var data = await _entityService.GetAllToTableAsync(model.EntityName);
             return Ok(data);
-        }
-
-        public class GetEntityModel
-        {
-            public int? Id { get; set; }
-            public string EntityName { get; set; }
-        }
-
-        public class SaveEntityModel
-        {
-            public SaveEntityModel()
-            {
-                Data = new Dictionary<string, object>();
-            }
-
-            public string EntityName { get; set; }
-            public int LanguageId { get; set; }
-
-            [JsonConverter(typeof(DictionaryStringObjectJsonConverter))]
-            public Dictionary<string, object> Data { get; set; }
-        }
-
-        public class DeleteEntityModel
-        {
-            public int Id { get; set; }
-            public string EntityName { get; set; }
-        }
-
-        public class GetAllModel
-        {
-            public string EntityName { get; set; }
         }
     }
 }

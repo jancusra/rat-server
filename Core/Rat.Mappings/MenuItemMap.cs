@@ -1,4 +1,4 @@
-﻿using Rat.Contracts;
+﻿using Rat.Contracts.Models;
 using Rat.Domain.Entities;
 
 namespace Rat.Mappings

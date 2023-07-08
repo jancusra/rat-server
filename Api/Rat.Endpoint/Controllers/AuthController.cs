@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Rat.Contracts.Models.User;
 using Rat.Domain.Exceptions;
 using Rat.Framework.Authentication;
 
@@ -18,7 +19,7 @@ namespace Test.Endpoint.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Authenticate([FromBody]LoginModel model)
+        public virtual async Task<IActionResult> Authenticate([FromBody]LoginDto model)
         {
             if (model == null || string.IsNullOrEmpty(model.Email))
             {
@@ -37,11 +38,5 @@ namespace Test.Endpoint.Controllers
 
             return Ok();
         }
-    }
-
-    public class LoginModel
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Rat.Contracts;
+using Rat.Contracts.Models;
 
 namespace Rat.Services
 {

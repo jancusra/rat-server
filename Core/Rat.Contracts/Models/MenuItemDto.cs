@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Rat.Contracts.Common;
 
-namespace Rat.Contracts
+namespace Rat.Contracts.Models
 {
     public partial class MenuItemDto : BaseDto
     {

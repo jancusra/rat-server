@@ -8,6 +8,7 @@ using Rat.Contracts.Common;
 using Rat.Domain;
 using Rat.Domain.EntityAttributes;
 using Rat.Domain.EntityTypes;
+using Rat.Domain.Exceptions;
 using Rat.Domain.Extensions;
 using Rat.Domain.Infrastructure;
 using Rat.Domain.Types;
@@ -126,6 +127,12 @@ namespace Rat.Services
         public virtual Type GetTableEntityTypeByName(string entityName)
         {
             var typeEntityData = _appTypeFinder.GetAssemblyQualifiedNameByClass(entityName, ClassType.Entities);
+
+            if (string.IsNullOrEmpty(typeEntityData))
+            {
+                throw new NonExistingEntityException(entityName);
+            }
+
             return Type.GetType(typeEntityData);
         }
 

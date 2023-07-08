@@ -69,7 +69,7 @@ namespace Rat.Framework.Authentication
             }
             else
             {
-                throw new NonExistingEntityException(nameof(User));
+                throw new NonExistingEntityEntryException(nameof(User));
             }
         }
 

@@ -2,13 +2,12 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using Rat.Services;
+using Rat.Contracts.Models.User;
 using Rat.Framework.Authentication;
+using Rat.Services;
 
 namespace Rat.Endpoint.Controllers
 {
-    //[Authorize]
     [ApiController]
     [Route("api/[controller]/[action]")]
     public partial class UserController : ControllerBase
@@ -39,26 +38,11 @@ namespace Rat.Endpoint.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<IActionResult> Register([FromBody]RegisterModel model)
+        public virtual async Task<IActionResult> Register([FromBody]RegisterDto model)
         {
             await _userService.RegisterNewUserAsync(model.Email, model.Password, model.PasswordVerify);
             
             return Ok();
-        }
-
-        [Authorize]
-        public virtual async Task<IActionResult> GetAll()
-        {
-            var data = await _userService.GetAllAsync();
-
-            return Ok(data);
-        }
-
-        public class RegisterModel
-        {
-            public string Email { get; set; }
-            public string Password { get; set; }
-            public string PasswordVerify { get; set; }
         }
     }
 }
