@@ -1,4 +1,4 @@
-﻿namespace Rat.Framework.Authentication
+﻿namespace Rat.Domain
 {
     public static class CustomClaimTypes
     {

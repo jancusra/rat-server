@@ -1,9 +1,6 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rat.Contracts.Models.User;
-using Rat.Framework.Authentication;
 using Rat.Services;
 
 namespace Rat.Endpoint.Controllers
@@ -26,13 +23,11 @@ namespace Rat.Endpoint.Controllers
 
         public virtual async Task<IActionResult> GetCurrentUserData()
         {
-            var identity = HttpContext.User.Identity as ClaimsIdentity;
-            var emailClaim = identity.FindFirst(ClaimTypes.Email);
-            var isAdminClaim = identity.FindFirst(CustomClaimTypes.IsAdmin);
+            var userClaims = _userService.GetCurrentUserClaims();
 
             return Ok(new { 
-                Email = emailClaim != null ? emailClaim.Value : string.Empty,
-                IsAdmin = isAdminClaim != null ? Convert.ToBoolean(isAdminClaim.Value) : false,
+                userClaims.Email,
+                userClaims.IsAdmin,
                 Languages = await _languageService.GetAllAsync()
             });
         }

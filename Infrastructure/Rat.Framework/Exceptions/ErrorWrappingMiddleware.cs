@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Rat.Domain.Exceptions;
 using Rat.Domain.Responses;
+using Rat.Services;
 
 namespace Rat.Framework.Exceptions
 {
@@ -16,7 +16,7 @@ namespace Rat.Framework.Exceptions
             this.next = next;
         }
 
-        public async Task Invoke(HttpContext context/*, ILogger<ErrorWrappingMiddleware> logger*/)
+        public async Task Invoke(HttpContext context, ILogService logger)
         {
             try
             {
@@ -24,12 +24,12 @@ namespace Rat.Framework.Exceptions
             }
             catch (BaseResponseException baseResponseException)
             {
-                //logger.LogWarning(baseResponseException.ResponseState.Code, baseResponseException.Message);
+                await logger.WarningAsync(baseResponseException.Message, baseResponseException);
                 await SendResponseIfNotStarted(context, baseResponseException.ResponseState);
             }
-            catch /*(Exception ex)*/
+            catch (Exception ex)
             {
-                //logger.LogError(ResponseCodes.GlobalException.Code, ex, ex.ToString());
+                await logger.ErrorAsync(ex.Message, ex);
                 await SendResponseIfNotStarted(context, new ResponseState { Code = 10000, HttpStatusCode = 500, Message = "Non expected error" });
             }
         }

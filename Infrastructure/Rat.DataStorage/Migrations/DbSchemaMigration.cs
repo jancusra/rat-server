@@ -3,7 +3,7 @@ using Rat.Domain.Entities;
 
 namespace Rat.DataStorage.Migrations
 {
-    [Migration(1688406689)]
+    [Migration(1688948741)]
     public partial class DbSchemaMigration : AutoReversingMigration
     {
         private readonly ICreationTableManager _creationTableManager;
@@ -17,6 +17,7 @@ namespace Rat.DataStorage.Migrations
         {
             _creationTableManager.CreateOrAlterTable<Language>(Create, Alter);
             _creationTableManager.CreateOrAlterTable<Localization>(Create, Alter);
+            _creationTableManager.CreateOrAlterTable<Log>(Create, Alter);
             _creationTableManager.CreateOrAlterTable<MenuItem>(Create, Alter);
             _creationTableManager.CreateOrAlterTable<User>(Create, Alter);
             _creationTableManager.CreateOrAlterTable<UserPassword>(Create, Alter);

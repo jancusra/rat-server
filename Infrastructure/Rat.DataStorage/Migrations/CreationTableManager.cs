@@ -149,7 +149,7 @@ namespace Rat.DataStorage.Migrations
                 }
                 else
                 {
-                    createBuilder.AsString();
+                    createBuilder.AsString(int.MaxValue);
                 }
 
                 if (notNullableStringAttribute != null)

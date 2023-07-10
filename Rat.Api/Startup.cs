@@ -49,6 +49,7 @@ namespace Rat.Api
             services.AddScoped<IHashingService, HashingService>();
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddScoped<ILocalizationService, LocalizationService>();
+            services.AddScoped<ILogService, LogService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEntityService, EntityService>();
