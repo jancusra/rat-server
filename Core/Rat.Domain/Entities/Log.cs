@@ -3,6 +3,7 @@ using Rat.Domain.EntityAttributes;
 
 namespace Rat.Domain.Entities
 {
+    [CommonAccess]
     public partial class Log : TableEntity
     {
         public int LogLevelTypeId { get; set; }

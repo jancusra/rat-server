@@ -2,6 +2,8 @@
 {
     public enum CustomColumnType
     {
+        EnumIcon,
+        ShowDetail,
         EditInViewButton,
         DeleteButton
     }
