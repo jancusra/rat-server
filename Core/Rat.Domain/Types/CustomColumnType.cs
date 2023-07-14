@@ -3,7 +3,7 @@
     public enum CustomColumnType
     {
         EnumIcon,
-        ShowDetail,
+        ShowDetailButton,
         EditInViewButton,
         DeleteButton
     }

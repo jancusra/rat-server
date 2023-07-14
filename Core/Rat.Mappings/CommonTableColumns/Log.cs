@@ -34,8 +34,8 @@ namespace Rat.Mappings.CommonTableColumns
                 },
                 new ColumnMetadata()
                 {
-                    Name = CustomColumnType.ShowDetail.ToString(),
-                    EntryType = CustomColumnType.ShowDetail.ToString()
+                    Name = CustomColumnType.ShowDetailButton.ToString(),
+                    EntryType = CustomColumnType.ShowDetailButton.ToString()
                 }
             };
         }
