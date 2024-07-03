@@ -5,7 +5,6 @@ using System.Reflection;
 using FluentMigrator.Expressions;
 using LinqToDB.Mapping;
 using LinqToDB.Metadata;
-using LinqToDB.SqlQuery;
 using Rat.Domain;
 using Rat.Domain.EntityAttributes;
 
@@ -57,6 +56,8 @@ namespace Rat.DataStorage.Mapping
                     canBeNull = true;
                 }
 
+                var ms = new MappingSchema();
+
                 return new ColumnAttribute
                 {
                     Name = memberInfo.Name,
@@ -66,7 +67,7 @@ namespace Rat.DataStorage.Mapping
                     Length = columnSize,
                     Precision = default(int),
                     IsIdentity = memberInfo.Name == "Id",
-                    DataType = SqlDataType.GetDataType(columnSystemType).Type.DataType
+                    DataType = ms.GetDataType(columnSystemType).Type.DataType
                 };
             });
 
