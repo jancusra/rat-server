@@ -1,4 +1,4 @@
 ﻿{
   "DataProvider": "mysql",
-  "DataConnectionString": "Server=localhost;Port=3306;Database=testapi;Uid=root;Pwd=local456*;"
+  "DataConnectionString": "Server=localhost;Port=3306;Database=testapi;Uid=root;Pwd=local456***;"
 }

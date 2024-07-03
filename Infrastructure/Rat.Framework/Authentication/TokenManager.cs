@@ -54,7 +54,7 @@ namespace Rat.Framework.Authentication
                     Expires = DateTime.UtcNow.AddMinutes(_jwtOptions.Value.ExpiryMinutes),
                     SigningCredentials = new SigningCredentials(
                         new SymmetricSecurityKey(key),
-                        SecurityAlgorithms.HmacSha512Signature)
+                        SecurityAlgorithms.HmacSha256Signature)
                 };
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
