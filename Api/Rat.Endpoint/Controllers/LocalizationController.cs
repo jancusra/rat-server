@@ -17,6 +17,11 @@ namespace Rat.Endpoint.Controllers
             _localizationService = localizationService;
         }
 
+        /// <summary>
+        /// Get localizations by specific language ID
+        /// </summary>
+        /// <param name="languageId"></param>
+        /// <returns>dictionary of all filtered localizations</returns>
         public virtual async Task<IActionResult> GetByLanguageId(int languageId)
         {
             var locales = (await _localizationService.GetByLanguageIdAsync(languageId))

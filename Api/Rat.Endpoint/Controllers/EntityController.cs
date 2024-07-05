@@ -23,6 +23,11 @@ namespace Rat.Endpoint.Controllers
             _entityValidationService = entityValidationService;
         }
 
+        /// <summary>
+        /// Get common entity by ID and entity name string
+        /// </summary>
+        /// <param name="model">model: ID (if null will return default entity), entity name</param>
+        /// <returns>final entity result</returns>
         [HttpPost]
         public virtual async Task<IActionResult> GetEntity([FromBody]GetEntityDto model)
         {
@@ -30,6 +35,11 @@ namespace Rat.Endpoint.Controllers
             return Ok(data);
         }
 
+        /// <summary>
+        /// Validate and save common entity
+        /// </summary>
+        /// <param name="model">model: entity name, language and entity data</param>
+        /// <returns>validation errors or OK result</returns>
         [HttpPost]
         public virtual async Task<IActionResult> SaveEntity([FromBody]SaveEntityDto model)
         {
@@ -47,6 +57,11 @@ namespace Rat.Endpoint.Controllers
             }
         }
 
+        /// <summary>
+        /// Delete common entity by ID and entity name
+        /// </summary>
+        /// <param name="model">model: entity ID and name</param>
+        /// <returns>OK result</returns>
         [HttpPost]
         public virtual async Task<IActionResult> DeleteEntity([FromBody]DeleteEntityDto model)
         {
@@ -54,6 +69,12 @@ namespace Rat.Endpoint.Controllers
             return Ok(true);
         }
 
+
+        /// <summary>
+        /// Get all common entity entries to table
+        /// </summary>
+        /// <param name="model">model: entity name</param>
+        /// <returns>OK result</returns>
         [HttpPost]
         public virtual async Task<IActionResult> GetAllToTable([FromBody]GetAllDto model)
         {

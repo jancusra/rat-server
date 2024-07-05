@@ -7,6 +7,10 @@ namespace Rat.Endpoint.Controllers
     [Route("api/[controller]")]
     public partial class HomeController : ControllerBase
     {
+        /// <summary>
+        /// Default starting api method, to verify running app
+        /// </summary>
+        /// <returns>array of strings</returns>
         [HttpGet]
         public virtual IEnumerable<string> Get()
         {

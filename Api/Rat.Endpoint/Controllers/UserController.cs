@@ -21,6 +21,10 @@ namespace Rat.Endpoint.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Get data about currently logged user
+        /// </summary>
+        /// <returns></returns>
         public virtual async Task<IActionResult> GetCurrentUserData()
         {
             var userClaims = _userService.GetCurrentUserClaims();
@@ -32,6 +36,11 @@ namespace Rat.Endpoint.Controllers
             });
         }
 
+        /// <summary>
+        /// Register new user
+        /// </summary>
+        /// <param name="model">model: email and necessary passwords</param>
+        /// <returns>OK result</returns>
         [HttpPost]
         public virtual async Task<IActionResult> Register([FromBody]RegisterDto model)
         {

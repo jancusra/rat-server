@@ -18,6 +18,12 @@ namespace Test.Endpoint.Controllers
             _tokenManager = tokenManager;
         }
 
+        /// <summary>
+        /// Create JWT token / authenticate user by email and password
+        /// </summary>
+        /// <param name="model">inserted email and password</param>
+        /// <returns>exception or OK result</returns>
+        /// <exception cref="InvalidInputRequestDataException"></exception>
         [HttpPost]
         public virtual async Task<IActionResult> Authenticate([FromBody]LoginDto model)
         {
@@ -31,6 +37,10 @@ namespace Test.Endpoint.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Logout for currently logged user
+        /// </summary>
+        /// <returns>OK result</returns>
         [HttpPost]
         public virtual async Task<IActionResult> Logout()
         {
