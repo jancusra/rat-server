@@ -6,6 +6,10 @@ namespace Rat.Mappings.CommonEntityEntries
 {
     public static class User
     {
+        /// <summary>
+        /// Configured metadata to get/edit user entity
+        /// </summary>
+        /// <returns>list of configured data</returns>
         public static IList<EntityEntryDto> GetMetadata()
         {
             return new List<EntityEntryDto>()

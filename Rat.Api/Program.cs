@@ -9,6 +9,10 @@ namespace Rat.Api
 {
     public class Program
     {
+        /// <summary>
+        /// The main starting application point
+        /// </summary>
+        /// <param name="args">app arguments</param>
         public static async Task Main(string[] args)
         {
             var webHost = CreateHostBuilder(args).Build();
@@ -17,6 +21,22 @@ namespace Rat.Api
             await webHost.RunAsync();
         }
 
+        /// <summary>
+        /// Create application host builder by configuration
+        /// </summary>
+        /// <param name="args">app arguments</param>
+        /// <returns>final host builder</returns>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+
+        /// <summary>
+        /// Update database model (apply configured migrations)
+        /// </summary>
+        /// <param name="serviceProvider">web services</param>
         private static void ApplyUpMigration(IServiceProvider serviceProvider)
         {
             using (var scope = serviceProvider.CreateScope())
@@ -25,12 +45,5 @@ namespace Rat.Api
                 runner.MigrateUp();
             }
         }
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
     }
 }

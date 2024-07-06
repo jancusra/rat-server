@@ -28,7 +28,10 @@ namespace Rat.Api
             _webHostEnvironment = webHostEnvironment;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container
+        /// </summary>
+        /// <param name="services">collection of services</param>
         public void ConfigureServices(IServiceCollection services)
         {
             //see https://docs.microsoft.com/dotnet/framework/network-programming/tls
@@ -61,6 +64,10 @@ namespace Rat.Api
             services.AddApplicationOptions(_configuration);
         }
 
+        /// <summary>
+        /// Dynamic library scanning for another Rat project .dlls
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServicesByLibraries(IServiceCollection services)
         {
             var appTypeFinder = new AppTypeFinder();
@@ -74,7 +81,11 @@ namespace Rat.Api
                 instance.ConfigureServices(services);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline
+        /// </summary>
+        /// <param name="app">application builder</param>
+        /// <param name="env">web host environment</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
