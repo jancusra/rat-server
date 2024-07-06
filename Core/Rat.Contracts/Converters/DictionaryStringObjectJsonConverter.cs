@@ -7,6 +7,14 @@ namespace Rat.Contracts.Converters
 {
     public class DictionaryStringObjectJsonConverter : JsonConverter<Dictionary<string, object>>
     {
+        /// <summary>
+        /// Will deserialize JSON object to dictionary model string/object
+        /// </summary>
+        /// <param name="reader">JSON reader</param>
+        /// <param name="typeToConvert">type of converter</param>
+        /// <param name="options">serializer options</param>
+        /// <returns>final dictionary string/object model</returns>
+        /// <exception cref="JsonException"></exception>
         public override Dictionary<string, object> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartObject)
@@ -43,11 +51,24 @@ namespace Rat.Contracts.Converters
             return dictionary;
         }
 
+        /// <summary>
+        /// Will convert serialize dictionary model string/object to JSON
+        /// </summary>
+        /// <param name="writer">JSON writer</param>
+        /// <param name="value">input dictionary</param>
+        /// <param name="options">serializer options</param>
         public override void Write(Utf8JsonWriter writer, Dictionary<string, object> value, JsonSerializerOptions options)
         {
             JsonSerializer.Serialize(writer, value, options);
         }
 
+        /// <summary>
+        /// Get object value by by reader token type
+        /// </summary>
+        /// <param name="reader">JSON reader</param>
+        /// <param name="options">serializer options</param>
+        /// <returns>result object</returns>
+        /// <exception cref="JsonException"></exception>
         private object ExtractValue(ref Utf8JsonReader reader, JsonSerializerOptions options)
         {
             switch (reader.TokenType)
