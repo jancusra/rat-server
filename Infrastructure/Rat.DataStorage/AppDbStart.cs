@@ -8,13 +8,16 @@ using FluentMigrator.Runner.Processors;
 using Rat.Domain;
 using Rat.Domain.Infrastructure;
 using Rat.DataStorage.DataProviders;
-using Rat.DataStorage.Mapping;
 using Rat.DataStorage.Migrations;
 
 namespace Rat.DataStorage
 {
     public partial class AppDbStart : IAppStart
     {
+        /// <summary>
+        /// Method to configure all database services at application start
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             var migrationAssemblies = new AppTypeFinder().FindClassesOfType<MigrationBase>()

@@ -18,6 +18,9 @@ using Rat.Domain.Infrastructure;
 
 namespace Rat.DataStorage.Migrations
 {
+    /// <summary>
+    /// Class to define table migration creation/alternation
+    /// </summary>
     public partial class CreationTableManager : ICreationTableManager
     {
         private readonly IAppTypeFinder _appTypeFinder;
@@ -56,6 +59,12 @@ namespace Rat.DataStorage.Migrations
             };
         }
 
+        /// <summary>
+        /// Create or modify table (migration process)
+        /// </summary>
+        /// <typeparam name="TEntity">entity type</typeparam>
+        /// <param name="createExpressionRoot">the root expression for a CREATE operation</param>
+        /// <param name="alterExpressionRoot">the root expression interface for the alterations</param>
         public virtual void CreateOrAlterTable<TEntity>(ICreateExpressionRoot createExpressionRoot, IAlterExpressionRoot alterExpressionRoot)
         {
             var type = typeof(TEntity);
@@ -80,11 +89,22 @@ namespace Rat.DataStorage.Migrations
             }
         }
 
+        /// <summary>
+        /// Determine if table exists in schema
+        /// </summary>
+        /// <param name="tableName">name of the table</param>
+        /// <returns>bool result</returns>
         protected bool TableExists(string tableName)
         {
             return _schemaExpressionRoot.Schema("dbo").Table(tableName).Exists();
         }
 
+
+        /// <summary>
+        /// Create database table
+        /// </summary>
+        /// <param name="type">entity type</param>
+        /// <param name="builder">expression builder</param>
         protected void CreateTableExpressions(Type type, CreateTableExpressionBuilder builder)
         {
             if (!builder.Expression.Columns.Any(c => c.IsPrimaryKey))
@@ -111,6 +131,13 @@ namespace Rat.DataStorage.Migrations
             }
         }
 
+
+        /// <summary>
+        /// Create column by entity type
+        /// </summary>
+        /// <param name="type">entity type</param>
+        /// <param name="propertyInfo">entity column property info</param>
+        /// <param name="createBuilder">expression builder</param>
         protected virtual void CreateTableColumnByEntityType(
             Type type,
             PropertyInfo propertyInfo,
@@ -131,6 +158,12 @@ namespace Rat.DataStorage.Migrations
             ResolveCreateTableColumnAttributes(propertyInfo, createBuilder);
         }
 
+
+        /// <summary>
+        /// Configure expression builder by entity column attributes
+        /// </summary>
+        /// <param name="propertyInfo">entity column property info</param>
+        /// <param name="createBuilder">expression builder</param>
         protected virtual void ResolveCreateTableColumnAttributes(
             PropertyInfo propertyInfo,
             CreateTableExpressionBuilder createBuilder)
@@ -186,11 +219,20 @@ namespace Rat.DataStorage.Migrations
             }
         }
 
+        /// <summary>
+        /// Create empty migration context
+        /// </summary>
+        /// <returns>migration context</returns>
         protected IMigrationContext CreateNullMigrationContext()
         {
             return new MigrationContext(new NullIfDatabaseProcessor(), _migrationContext.ServiceProvider, null, null);
         }
 
+        /// <summary>
+        /// Get create table expression
+        /// </summary>
+        /// <param name="type">entity type</param>
+        /// <returns>create table expression</returns>
         public virtual CreateTableExpression GetCreateTableExpression(Type type)
         {
             var expression = new CreateTableExpression { TableName = type.Name };

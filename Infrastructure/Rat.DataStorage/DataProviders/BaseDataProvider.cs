@@ -11,12 +11,19 @@ using Rat.Domain.Infrastructure;
 
 namespace Rat.DataStorage.DataProviders
 {
+    /// <summary>
+    /// Base abstract class for data providers
+    /// </summary>
     public abstract class BaseDataProvider
     {
         protected abstract IDataProvider LinqToDbDataProvider { get; }
 
         protected abstract DbConnection GetInternalDbConnection(string connectionString);
 
+        /// <summary>
+        /// Get provider mapping schema
+        /// </summary>
+        /// <returns>instance of mapping schema</returns>
         private MappingSchema GetMappingSchema()
         {
             if (Singleton<MappingSchema>.Instance is null)
@@ -30,11 +37,21 @@ namespace Rat.DataStorage.DataProviders
             return Singleton<MappingSchema>.Instance;
         }
 
+        /// <summary>
+        /// Create database connection
+        /// </summary>
+        /// <returns>database connection</returns>
         protected virtual DataConnection CreateDataConnection()
         {
             return CreateDataConnection(LinqToDbDataProvider);
         }
 
+        /// <summary>
+        /// Create database connection by provider
+        /// </summary>
+        /// <param name="dataProvider">specific data provider</param>
+        /// <returns>database connection</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         protected virtual DataConnection CreateDataConnection(IDataProvider dataProvider)
         {
             if (dataProvider is null)
@@ -79,6 +96,10 @@ namespace Rat.DataStorage.DataProviders
                 .GetTable<TEntity>();
         }
 
+        /// <summary>
+        /// Get current data provider connection string
+        /// </summary>
+        /// <returns>database connection string</returns>
         protected string GetCurrentConnectionString()
         {
             return DatabaseSettingsManager.GetSettings().ConnectionString;

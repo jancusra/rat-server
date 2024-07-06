@@ -7,6 +7,12 @@ using FluentMigrator.Runner.Processors;
 
 namespace Rat.DataStorage.Migrations
 {
+    /// <summary>
+    /// Accesses the selected migration processor
+    /// </summary>
+    /// <remarks>
+    /// This is only different from using <see cref="IMigrationProcessor"/>
+    /// as constructor parameter when multiple databases should be supported
     public partial class DbProcessorAccessor : IProcessorAccessor
     {
         public DbProcessorAccessor(
@@ -15,6 +21,11 @@ namespace Rat.DataStorage.Migrations
             ConfigureProcessor(processors.ToList());
         }
 
+        /// <summary>
+        /// Configure processor by configured data provider
+        /// </summary>
+        /// <param name="processors">available processors</param>
+        /// <exception cref="ProcessorFactoryNotFoundException"></exception>
         protected virtual void ConfigureProcessor(
             IList<IMigrationProcessor> processors)
         {
@@ -33,6 +44,13 @@ namespace Rat.DataStorage.Migrations
             };
         }
 
+        /// <summary>
+        /// Find generator by data provider identifier
+        /// </summary>
+        /// <param name="processors">available processors</param>
+        /// <param name="processorsId">data provider identifier</param>
+        /// <returns>found migration processor</returns>
+        /// <exception cref="ProcessorFactoryNotFoundException"></exception>
         protected IMigrationProcessor FindGenerator(IList<IMigrationProcessor> processors,
             string processorsId)
         {
@@ -49,6 +67,9 @@ namespace Rat.DataStorage.Migrations
                 $@"A migration generator with the ID {processorsId} couldn't be found. Available generators are: {generatorNames}");
         }
 
+        /// <summary>
+        /// Gets the selected migration processor
+        /// </summary>
         public IMigrationProcessor Processor { get; protected set; } = null!;
     }
 }

@@ -31,7 +31,6 @@ namespace Rat.Domain
         /// <param name="entity">entity</param>
         Task UpdateAsync<TEntity>(TEntity entity) where TEntity : TableEntity;
 
-
         /// <summary>
         /// Delete entity in the database by ID
         /// </summary>

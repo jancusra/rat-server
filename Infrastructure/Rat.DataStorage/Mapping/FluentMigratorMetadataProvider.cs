@@ -12,6 +12,13 @@ namespace Rat.DataStorage.Mapping
 {
     public partial class FluentMigratorMetadataProvider : IMetadataReader
     {
+        /// <summary>
+        /// Get column attribute by specified type
+        /// </summary>
+        /// <typeparam name="T">attribute type</typeparam>
+        /// <param name="type">attributes owner type</param>
+        /// <param name="memberInfo">attributes owner member</param>
+        /// <returns>column attribute</returns>
         protected T GetAttribute<T>(Type type, MemberInfo memberInfo) where T : Attribute
         {
             var attribute = Types.GetOrAdd((type, memberInfo), t =>
@@ -74,6 +81,14 @@ namespace Rat.DataStorage.Mapping
             return (T)attribute;
         }
 
+        /// <summary>
+        /// Gets attributes of specified type, associated with specified type
+        /// </summary>
+        /// <typeparam name="T">attribute type</typeparam>
+        /// <param name="type">attributes owner type</param>
+        /// <param name="attributeType">type of the attribute table/column</param>
+        /// <param name="memberInfo">attributes owner member</param>
+        /// <returns>attributes of specified type</returns>
         protected T[] GetAttributes<T>(Type type, Type attributeType, MemberInfo memberInfo = null)
             where T : Attribute
         {
@@ -86,25 +101,25 @@ namespace Rat.DataStorage.Mapping
         }
 
         /// <summary>
-        /// Gets attributes of specified type, associated with specified type.
+        /// Gets attributes of specified type, associated with specified type
         /// </summary>
-        /// <typeparam name="T">Attribute type.</typeparam>
-        /// <param name="type">Attributes owner type.</param>
-        /// <param name="inherit">If <c>true</c> - include inherited attributes.</param>
-        /// <returns>Attributes of specified type.</returns>
+        /// <typeparam name="T">attribute type</typeparam>
+        /// <param name="type">attributes owner type</param>
+        /// <param name="inherit">if <c>true</c> - include inherited attributes</param>
+        /// <returns>attributes of specified type</returns>
         public virtual T[] GetAttributes<T>(Type type, bool inherit = true) where T : Attribute
         {
             return GetAttributes<T>(type, typeof(TableAttribute));
         }
 
         /// <summary>
-        /// Gets attributes of specified type, associated with specified type member.
+        /// Gets attributes of specified type, associated with specified type member
         /// </summary>
-        /// <typeparam name="T">Attribute type.</typeparam>
-        /// <param name="type">Member's owner type.</param>
-        /// <param name="memberInfo">Attributes owner member.</param>
-        /// <param name="inherit">If <c>true</c> - include inherited attributes.</param>
-        /// <returns>Attributes of specified type.</returns>
+        /// <typeparam name="T">attribute type</typeparam>
+        /// <param name="type">member's owner type</param>
+        /// <param name="memberInfo">attributes owner member</param>
+        /// <param name="inherit">if <c>true</c> - include inherited attributes</param>
+        /// <returns>attributes of specified type</returns>
         public virtual T[] GetAttributes<T>(Type type, MemberInfo memberInfo, bool inherit = true) where T : Attribute
         {
             return GetAttributes<T>(type, typeof(ColumnAttribute), memberInfo);
@@ -113,8 +128,8 @@ namespace Rat.DataStorage.Mapping
         /// <summary>
         /// Gets the dynamic columns defined on given type
         /// </summary>
-        /// <param name="type">The type</param>
-        /// <returns>All dynamic columns defined on given type</returns>
+        /// <param name="type">the type</param>
+        /// <returns>all dynamic columns defined on given type</returns>
         public MemberInfo[] GetDynamicColumns(Type type)
         {
             return Array.Empty<MemberInfo>();

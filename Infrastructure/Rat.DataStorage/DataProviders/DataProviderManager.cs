@@ -2,8 +2,16 @@
 
 namespace Rat.DataStorage.DataProviders
 {
+    /// <summary>
+    /// Class for methods managing data providers
+    /// </summary>
     public partial class DataProviderManager : IDataProviderManager
     {
+        /// <summary>
+        /// Get configured data manager
+        /// </summary>
+        /// <returns>data provider</returns>
+        /// <exception cref="Exception"></exception>
         public static IDbDataProvider GetDataProvider()
         {
             var databaseType = DatabaseSettingsManager.GetSettings().DataProvider;
@@ -17,6 +25,9 @@ namespace Rat.DataStorage.DataProviders
             };
         }
 
+        /// <summary>
+        /// Property to get actual data provider
+        /// </summary>
         public IDbDataProvider DataProvider
         {
             get

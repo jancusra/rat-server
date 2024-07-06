@@ -6,6 +6,9 @@ using LinqToDB.DataProvider.SqlServer;
 
 namespace Rat.DataStorage.DataProviders
 {
+    /// <summary>
+    /// MsSQL data provider definition
+    /// </summary>
     public partial class MsSqlDataProvider : BaseDataProvider, IDbDataProvider
     {
         protected override IDataProvider LinqToDbDataProvider => SqlServerTools.GetDataProvider(SqlServerVersion.v2012, SqlServerProvider.MicrosoftDataSqlClient);

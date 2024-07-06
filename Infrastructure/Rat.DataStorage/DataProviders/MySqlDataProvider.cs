@@ -7,6 +7,9 @@ using MySql.Data.MySqlClient;
 
 namespace Rat.DataStorage.DataProviders
 {
+    /// <summary>
+    /// MySQL data provider definition
+    /// </summary>
     public partial class MySqlDataProvider : BaseDataProvider, IDbDataProvider
     {
         protected override IDataProvider LinqToDbDataProvider => MySqlTools.GetDataProvider(ProviderName.MySqlConnector);

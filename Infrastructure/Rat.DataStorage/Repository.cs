@@ -8,6 +8,9 @@ using Rat.Domain.EntityTypes;
 
 namespace Rat.DataStorage
 {
+    /// <summary>
+    /// Methods defining basic database operations with entities
+    /// </summary>
     public partial class Repository : IRepository
     {
         private readonly IDbDataProvider _dataProvider;

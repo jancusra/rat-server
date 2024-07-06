@@ -3,6 +3,9 @@ using Rat.Domain.Entities;
 
 namespace Rat.DataStorage.Migrations
 {
+    /// <summary>
+    /// Represents migration schema with unix timestamp as identifier
+    /// </summary>
     [Migration(1688948741)]
     public partial class DbSchemaMigration : AutoReversingMigration
     {
@@ -13,6 +16,9 @@ namespace Rat.DataStorage.Migrations
             _creationTableManager = creationTableManager;
         }
 
+        /// <summary>
+        /// Create or modify all database tables (entities)
+        /// </summary>
         public override void Up()
         {
             _creationTableManager.CreateOrAlterTable<Language>(Create, Alter);

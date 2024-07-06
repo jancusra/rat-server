@@ -11,6 +11,9 @@ using Rat.Domain.Infrastructure;
 
 namespace Rat.DataStorage.Migrations
 {
+    /// <summary>
+    /// Class to define table migration alternation (usually adding missing columns)
+    /// </summary>
     public partial class AlterationTableManager : IAlterationTableManager
     {
         private readonly IAppTypeFinder _appTypeFinder;
@@ -43,6 +46,12 @@ namespace Rat.DataStorage.Migrations
             };
         }
 
+
+        /// <summary>
+        /// Add missing columns to table
+        /// </summary>
+        /// <param name="type">entity type</param>
+        /// <param name="builder">expression builder</param>
         public virtual void AlterTableExpressions(Type type, AlterTableExpressionBuilder builder)
         {
             var propertiesToMap = _appTypeFinder.GetEntityPropertiesToMap(type);
@@ -56,11 +65,23 @@ namespace Rat.DataStorage.Migrations
             }
         }
 
+        /// <summary>
+        /// Determine if table column already exists
+        /// </summary>
+        /// <param name="tableName">name of the table</param>
+        /// <param name="columnName">name of the column</param>
+        /// <returns></returns>
         protected bool ColumnExists(string tableName, string columnName)
         {
             return _schemaExpressionRoot.Schema("dbo").Table(tableName).Column(columnName).Exists();
         }
 
+        /// <summary>
+        /// Add column by entity type
+        /// </summary>
+        /// <param name="type">entity type</param>
+        /// <param name="propertyInfo">entity column property info</param>
+        /// <param name="alterBuilder">expression builder</param>
         protected virtual void AddColumnByEntityType(
             Type type,
             PropertyInfo propertyInfo,
@@ -81,6 +102,11 @@ namespace Rat.DataStorage.Migrations
             ResolveAlterTableColumnAttributes(propertyInfo, alterBuilder);
         }
 
+        /// <summary>
+        /// Configure expression builder by entity column attributes
+        /// </summary>
+        /// <param name="propertyInfo">entity column property info</param>
+        /// <param name="alterBuilder">expression builder</param>
         protected virtual void ResolveAlterTableColumnAttributes(
             PropertyInfo propertyInfo,
             AlterTableExpressionBuilder alterBuilder)
