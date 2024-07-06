@@ -5,7 +5,7 @@ using Rat.Contracts.Converters;
 namespace Rat.Contracts.Models.Entity
 {
     /// <summary>
-    /// Represents model to save common entity
+    /// Represents a model for saving a common entity
     /// </summary>
     public partial class SaveEntityDto
     {

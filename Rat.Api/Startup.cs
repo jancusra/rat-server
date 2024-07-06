@@ -29,7 +29,7 @@ namespace Rat.Api
         }
 
         /// <summary>
-        /// This method gets called by the runtime. Use this method to add services to the container
+        /// This method gets called by the runtime. Use this method to add services to the container.
         /// </summary>
         /// <param name="services">collection of services</param>
         public void ConfigureServices(IServiceCollection services)
@@ -65,7 +65,7 @@ namespace Rat.Api
         }
 
         /// <summary>
-        /// Dynamic library scanning for another Rat project .dlls
+        /// Dynamic library scanning for the Rat project .dlls
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServicesByLibraries(IServiceCollection services)
@@ -82,7 +82,7 @@ namespace Rat.Api
         }
 
         /// <summary>
-        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// </summary>
         /// <param name="app">application builder</param>
         /// <param name="env">web host environment</param>

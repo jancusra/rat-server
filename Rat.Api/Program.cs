@@ -10,7 +10,7 @@ namespace Rat.Api
     public class Program
     {
         /// <summary>
-        /// The main starting application point
+        /// The main starting point of the application
         /// </summary>
         /// <param name="args">app arguments</param>
         public static async Task Main(string[] args)
@@ -22,7 +22,7 @@ namespace Rat.Api
         }
 
         /// <summary>
-        /// Create application host builder by configuration
+        /// Creating an application host builder by configuration
         /// </summary>
         /// <param name="args">app arguments</param>
         /// <returns>final host builder</returns>
@@ -34,7 +34,7 @@ namespace Rat.Api
                 });
 
         /// <summary>
-        /// Update database model (apply configured migrations)
+        /// Update the database model (apply configured migrations)
         /// </summary>
         /// <param name="serviceProvider">web services</param>
         private static void ApplyUpMigration(IServiceProvider serviceProvider)

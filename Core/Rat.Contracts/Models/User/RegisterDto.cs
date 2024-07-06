@@ -1,7 +1,7 @@
 ﻿namespace Rat.Contracts.Models.User
 {
     /// <summary>
-    /// Represents model for an user registration
+    /// Represents a model for user registration
     /// </summary>
     public partial class RegisterDto
     {

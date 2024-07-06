@@ -13,7 +13,7 @@ namespace Rat.Contracts.Converters
         /// <param name="reader">JSON reader</param>
         /// <param name="typeToConvert">type of converter</param>
         /// <param name="options">serializer options</param>
-        /// <returns>final dictionary string/object model</returns>
+        /// <returns>final string/object dictionary</returns>
         /// <exception cref="JsonException"></exception>
         public override Dictionary<string, object> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
@@ -52,7 +52,7 @@ namespace Rat.Contracts.Converters
         }
 
         /// <summary>
-        /// Will convert serialize dictionary model string/object to JSON
+        /// Will serialize string/object dictionary to the JSON
         /// </summary>
         /// <param name="writer">JSON writer</param>
         /// <param name="value">input dictionary</param>
@@ -63,7 +63,7 @@ namespace Rat.Contracts.Converters
         }
 
         /// <summary>
-        /// Get object value by by reader token type
+        /// Get object value by reader token type
         /// </summary>
         /// <param name="reader">JSON reader</param>
         /// <param name="options">serializer options</param>

@@ -9,6 +9,11 @@ namespace Rat.Framework.Authentication
 {
     public static class JwtBearerStartupRegistrationExtensions
     {
+        /// <summary>
+        /// Startup method to register JWT bearer authentication
+        /// </summary>
+        /// <param name="services">collection of services</param>
+        /// <param name="configuration">application configuration</param>
         public static void AddJwtBearerAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtSection = configuration.GetSection("JWT");

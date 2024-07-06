@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Rat.Framework.Authentication
 {
+    /// <summary>
+    /// Middleware to handle request and check token
+    /// </summary>
     public class TokenManagerMiddleware : IMiddleware
     {
         private readonly ITokenManager _tokenManager;
@@ -13,6 +16,11 @@ namespace Rat.Framework.Authentication
             _tokenManager = tokenManager;
         }
         
+        /// <summary>
+        /// Continue to the next if token is active
+        /// </summary>
+        /// <param name="context">HTTP context</param>
+        /// <param name="next">next delegate</param>
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
             if (await _tokenManager.IsCurrentTokenActiveAsync())

@@ -4,7 +4,7 @@ using Rat.Contracts.Common;
 namespace Rat.Contracts.Models
 {
     /// <summary>
-    /// Represents model for an administartion menu item
+    /// Represents the model for the administration menu item
     /// </summary>
     public partial class MenuItemDto : BaseDto
     {

@@ -6,6 +6,11 @@ namespace Rat.Framework
 {
     public static class StartupRegistrationExtensions
     {
+        /// <summary>
+        /// Add application options at startup
+        /// </summary>
+        /// <param name="services">collection of services</param>
+        /// <param name="configuration">application configuration</param>
         public static void AddApplicationOptions(this IServiceCollection services, IConfiguration configuration)
         {
             var usersSection = configuration.GetSection("User");

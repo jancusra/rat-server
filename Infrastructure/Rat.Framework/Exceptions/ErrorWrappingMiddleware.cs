@@ -7,6 +7,9 @@ using Rat.Services;
 
 namespace Rat.Framework.Exceptions
 {
+    /// <summary>
+    /// Error wrapping middleware to log api issues
+    /// </summary>
     public partial class ErrorWrappingMiddleware : BaseErrorMiddleware
     {
         private readonly RequestDelegate next;
@@ -16,6 +19,11 @@ namespace Rat.Framework.Exceptions
             this.next = next;
         }
 
+        /// <summary>
+        /// Method to log api warnings/errors
+        /// </summary>
+        /// <param name="context">HTTP context</param>
+        /// <param name="logger">logger service</param>
         public async Task Invoke(HttpContext context, ILogService logger)
         {
             try

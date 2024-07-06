@@ -1,7 +1,7 @@
 ﻿namespace Rat.Contracts.Models.User
 {
     /// <summary>
-    /// Represents simple login model
+    /// Represents a simple login model
     /// </summary>
     public partial class LoginDto
     {

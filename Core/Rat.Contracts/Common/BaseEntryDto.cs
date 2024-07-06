@@ -3,7 +3,7 @@
 namespace Rat.Contracts.Common
 {
     /// <summary>
-    /// Represents base DTO entry for a table column
+    /// Represents the base DTO entry for a table column
     /// </summary>
     public partial class BaseEntryDto
     {
@@ -28,17 +28,17 @@ namespace Rat.Contracts.Common
         public int Order { get; set; }
 
         /// <summary>
-        /// Should be column hidden in a table
+        /// Should be column hidden in the table
         /// </summary>
         public bool Hidden { get; set; }
 
         /// <summary>
-        /// Should be column excluded from a table
+        /// Should be column excluded from the table
         /// </summary>
         public bool Excluded { get; set; }
 
         /// <summary>
-        /// Select options for a columns with possible options (like enums)
+        /// Select options for columns with possible options (as enums)
         /// </summary>
         public Dictionary<int, string> SelectOptions { get; set; }
     }

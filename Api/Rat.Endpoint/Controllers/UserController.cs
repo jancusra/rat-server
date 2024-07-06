@@ -22,9 +22,9 @@ namespace Rat.Endpoint.Controllers
         }
 
         /// <summary>
-        /// Get data about currently logged user
+        /// Retrieving data about the currently logged in user
         /// </summary>
-        /// <returns></returns>
+        /// <returns>logged in user data</returns>
         public virtual async Task<IActionResult> GetCurrentUserData()
         {
             var userClaims = _userService.GetCurrentUserClaims();

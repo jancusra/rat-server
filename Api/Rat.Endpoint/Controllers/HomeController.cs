@@ -8,7 +8,7 @@ namespace Rat.Endpoint.Controllers
     public partial class HomeController : ControllerBase
     {
         /// <summary>
-        /// Default starting api method, to verify running app
+        /// Default starting api method (verify running app)
         /// </summary>
         /// <returns>array of strings</returns>
         [HttpGet]

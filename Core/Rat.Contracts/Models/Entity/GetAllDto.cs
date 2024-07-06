@@ -1,7 +1,7 @@
 ﻿namespace Rat.Contracts.Models.Entity
 {
     /// <summary>
-    /// Represents model to get all common entities
+    /// Represents a model for obtaining all common entities
     /// </summary>
     public partial class GetAllDto
     {

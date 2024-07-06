@@ -1,7 +1,7 @@
 ﻿namespace Rat.Contracts.Models.Entity
 {
     /// <summary>
-    /// Represents model to delete common entity
+    /// Represents a model for the removal of a common entity
     /// </summary>
     public partial class DeleteEntityDto
     {

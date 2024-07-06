@@ -1,12 +1,12 @@
 ﻿namespace Rat.Contracts.Common
 {
     /// <summary>
-    /// Represents extended base DTO entry for an entity
+    /// Represents the extended base DTO entry for the entity
     /// </summary>
     public partial class EntityEntryDto : BaseEntryDto
     {
         /// <summary>
-        /// entity specific value
+        /// Specific entity value
         /// </summary>
         public dynamic Value { get; set; }
     }

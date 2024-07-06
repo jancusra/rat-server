@@ -24,7 +24,7 @@ namespace Rat.Endpoint.Controllers
         }
 
         /// <summary>
-        /// Get common entity by ID and entity name string
+        /// Get common entity by ID and entity name
         /// </summary>
         /// <param name="model">model: ID (if null will return default entity), entity name</param>
         /// <returns>final entity result</returns>
@@ -71,7 +71,7 @@ namespace Rat.Endpoint.Controllers
 
 
         /// <summary>
-        /// Get all common entity entries to table
+        /// Get all common entity entries into a table
         /// </summary>
         /// <param name="model">model: entity name</param>
         /// <returns>OK result</returns>

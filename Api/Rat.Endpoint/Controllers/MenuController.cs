@@ -21,7 +21,7 @@ namespace Rat.Endpoint.Controllers
         /// <summary>
         /// Get administration menu
         /// </summary>
-        /// <returns>the list of menu items</returns>
+        /// <returns>list of menu items</returns>
         [HttpPost]
         public virtual async Task<IActionResult> GetMenu()
         {

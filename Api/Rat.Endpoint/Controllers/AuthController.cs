@@ -38,7 +38,7 @@ namespace Test.Endpoint.Controllers
         }
 
         /// <summary>
-        /// Logout for currently logged user
+        /// Logout the currently logged in user
         /// </summary>
         /// <returns>OK result</returns>
         [HttpPost]
