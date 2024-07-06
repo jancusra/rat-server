@@ -2,6 +2,11 @@
 {
     public static class StringExtensions
     {
+        /// <summary>
+        /// Convert first char of string to lower case
+        /// </summary>
+        /// <param name="str">input string</param>
+        /// <returns>string with first char in lower case</returns>
         public static string FirstCharToLowerCase(this string str)
         {
             if (!string.IsNullOrEmpty(str) && char.IsUpper(str[0]))

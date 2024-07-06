@@ -2,6 +2,9 @@
 
 namespace Rat.Domain.Exceptions
 {
+    /// <summary>
+    /// Exception for inserted invalid data to input
+    /// </summary>
     public partial class InvalidInputRequestDataException : BaseResponseException
     {
         public InvalidInputRequestDataException()

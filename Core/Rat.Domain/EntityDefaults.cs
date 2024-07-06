@@ -1,5 +1,8 @@
 ﻿namespace Rat.Domain
 {
+    /// <summary>
+    /// Defined entity defaults to set table column boundaries
+    /// </summary>
     public static class EntityDefaults
     {
         public const int MaxTypicalStringLength = 200;

@@ -2,6 +2,9 @@
 
 namespace Rat.Domain.Exceptions
 {
+    /// <summary>
+    /// Exception for not existing table entity
+    /// </summary>
     public partial class NonExistingEntityException : BaseResponseException
     {
         public NonExistingEntityException(string entityName)

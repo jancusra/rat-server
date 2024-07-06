@@ -3,6 +3,9 @@ using Rat.Domain.Responses;
 
 namespace Rat.Domain.Exceptions
 {
+    /// <summary>
+    /// Core base api response exception
+    /// </summary>
     public partial class BaseResponseException : Exception
     {
         public BaseResponseException(ResponseState responseState)
