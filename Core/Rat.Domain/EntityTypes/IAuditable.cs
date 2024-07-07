@@ -3,7 +3,7 @@
 namespace Rat.Domain.EntityTypes
 {
     /// <summary>
-    /// Auditable entity has created and modified date
+    /// The auditable entity has a creation and modification date
     /// </summary>
     public partial interface IAuditable
     {

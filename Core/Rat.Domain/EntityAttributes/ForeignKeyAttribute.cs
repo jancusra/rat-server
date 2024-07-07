@@ -3,7 +3,7 @@
 namespace Rat.Domain.EntityAttributes
 {
     /// <summary>
-    /// Specify quickly entity entry foreign key to another table (binding to primary ID key column)
+    /// Specify entity entry foreign key to another table (binding to primary ID key column)
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, Inherited = true, AllowMultiple = false)]
     public partial class ForeignKeyAttribute : Attribute

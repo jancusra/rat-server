@@ -28,7 +28,7 @@ namespace Rat.Domain.Entities
         public string Email { get; set; }
 
         /// <summary>
-        /// System name as identifier for a system user
+        /// System name as system user identifier
         /// </summary>
         [MaxStringLength(EntityDefaults.MaxTypicalStringLength)]
         public string SystemName { get; set; }
@@ -44,7 +44,7 @@ namespace Rat.Domain.Entities
         public bool IsActive { get; set; }
 
         /// <summary>
-        /// Some administartor note about an user
+        /// An administrator's note about a user
         /// </summary>
         public string AdminNote { get; set; }
 
@@ -54,7 +54,7 @@ namespace Rat.Domain.Entities
         public int InvalidLoginAttempts { get; set; }
 
         /// <summary>
-        /// Last IP address belonged to user
+        /// Last IP address belonging to the user
         /// </summary>
         [MaxStringLength(EntityDefaults.MaxIpAddressLength)]
         public string LastIpAddress { get; set; }

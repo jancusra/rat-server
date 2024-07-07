@@ -1,7 +1,7 @@
 ﻿namespace Rat.Domain.Responses
 {
     /// <summary>
-    /// Defines core base api response model
+    /// Defines the basic api response model
     /// </summary>
     public partial class BaseResponse
     {

@@ -37,7 +37,7 @@ namespace Rat.Domain.Entities
         public int ItemOrder { get; set; }
 
         /// <summary>
-        /// Binding to parent menu item entry
+        /// Link to parent menu item entry
         /// </summary>
         public int ParentMenuItemId { get; set; }
     }

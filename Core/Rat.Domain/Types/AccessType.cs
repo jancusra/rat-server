@@ -1,17 +1,17 @@
 ﻿namespace Rat.Domain.Types
 {
     /// <summary>
-    /// Define type of access for a user role
+    /// Access type definition for the user role
     /// </summary>
     public enum AccessType
     {
         /// <summary>
-        /// Full access to modify and read all settings
+        /// Full access to edit and read all settings
         /// </summary>
         FullAccess = 10,
 
         /// <summary>
-        /// Access only to read all settings
+        /// Read-only access to all settings
         /// </summary>
         ReadOnly = 20,
 

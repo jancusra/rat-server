@@ -1,7 +1,7 @@
 ﻿namespace Rat.Domain.EntityTypes
 {
     /// <summary>
-    /// Specify if entity should be soft deleted
+    /// Specify if the entity should be soft deleted
     /// </summary>
     public partial interface ISoftDelete
     {

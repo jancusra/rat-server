@@ -8,7 +8,7 @@ namespace Rat.Domain.Options
     public partial class UserOptions
     {
         /// <summary>
-        /// Configured password hashing for a user
+        /// Configured password hashing for users
         /// </summary>
         public HashType PasswordHashing { get; set; }
     }

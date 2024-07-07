@@ -59,12 +59,6 @@ namespace Rat.DataStorage.Migrations
             };
         }
 
-        /// <summary>
-        /// Create or modify table (migration process)
-        /// </summary>
-        /// <typeparam name="TEntity">entity type</typeparam>
-        /// <param name="createExpressionRoot">the root expression for a CREATE operation</param>
-        /// <param name="alterExpressionRoot">the root expression interface for the alterations</param>
         public virtual void CreateOrAlterTable<TEntity>(ICreateExpressionRoot createExpressionRoot, IAlterExpressionRoot alterExpressionRoot)
         {
             var type = typeof(TEntity);
@@ -87,6 +81,16 @@ namespace Rat.DataStorage.Migrations
                     _alterionTableManager.AlterTableExpressions(type, alterBuilder);
                 }
             }
+        }
+
+        public virtual CreateTableExpression GetCreateTableExpression(Type type)
+        {
+            var expression = new CreateTableExpression { TableName = type.Name };
+            var builder = new CreateTableExpressionBuilder(expression, CreateNullMigrationContext());
+
+            CreateTableExpressions(type, builder);
+
+            return builder.Expression;
         }
 
         /// <summary>
@@ -226,21 +230,6 @@ namespace Rat.DataStorage.Migrations
         protected IMigrationContext CreateNullMigrationContext()
         {
             return new MigrationContext(new NullIfDatabaseProcessor(), _migrationContext.ServiceProvider, null, null);
-        }
-
-        /// <summary>
-        /// Get create table expression
-        /// </summary>
-        /// <param name="type">entity type</param>
-        /// <returns>create table expression</returns>
-        public virtual CreateTableExpression GetCreateTableExpression(Type type)
-        {
-            var expression = new CreateTableExpression { TableName = type.Name };
-            var builder = new CreateTableExpressionBuilder(expression, CreateNullMigrationContext());
-
-            CreateTableExpressions(type, builder);
-
-            return builder.Expression;
         }
     }
 }

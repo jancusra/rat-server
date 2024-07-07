@@ -3,7 +3,7 @@
 namespace Rat.Domain.Exceptions
 {
     /// <summary>
-    /// Exception for not existing entity entry
+    /// Exception for non existing entity entry
     /// </summary>
     public partial class NonExistingEntityEntryException : BaseResponseException
     {

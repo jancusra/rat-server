@@ -16,12 +16,12 @@
         ShowDetailButton,
 
         /// <summary>
-        /// Button to edit entry in the new view
+        /// Button to edit the entry in the new view
         /// </summary>
         EditInViewButton,
 
         /// <summary>
-        /// Button to delete entry
+        /// Button to delete an entry
         /// </summary>
         DeleteButton
     }

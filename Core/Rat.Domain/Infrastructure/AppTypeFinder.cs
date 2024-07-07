@@ -8,32 +8,20 @@ using Rat.Domain.Types;
 namespace Rat.Domain.Infrastructure
 {
     /// <summary>
-    /// Define class for a reflection operation (generally used for a dynamic library scanning)
+    /// Class definition for the reflection operation (usually used for dynamic library scanning)
     /// </summary>
     public partial class AppTypeFinder : IAppTypeFinder
     {
         /// <summary>
-        /// Prefix for Rat project scanned libraries
+        /// Prefix for libraries scanned within the Rat project
         /// </summary>
         private string RatAssembliesShouldStartsWith { get; set; } = "Rat.";
 
-        /// <summary>
-        /// Find a specific classes in libraries
-        /// </summary>
-        /// <typeparam name="T">class to find</typeparam>
-        /// <param name="onlyConcreteClasses">only concrete classes (not abstract)</param>
-        /// <returns>found types of specific class</returns>
         public IEnumerable<Type> FindClassesOfType<T>(bool onlyConcreteClasses = true)
         {
             return FindClassesOfType(typeof(T), onlyConcreteClasses);
         }
 
-        /// <summary>
-        /// Get assembly full name by specific class name (usually entity name)
-        /// </summary>
-        /// <param name="className">class/entity name</param>
-        /// <param name="classType">type of class to get</param>
-        /// <returns>full assembly name</returns>
         public virtual string GetAssemblyQualifiedNameByClass(string className, ClassType classType = ClassType.Class)
         {
             var assemblies = GetAssemblies();
@@ -69,20 +57,15 @@ namespace Rat.Domain.Infrastructure
             return string.Empty;
         }
 
-        /// <summary>
-        /// Get entity properties to map as table columns
-        /// </summary>
-        /// <param name="type">entity type</param>
-        /// <returns>properties to map as columns</returns>
         public virtual PropertyInfo[] GetEntityPropertiesToMap(Type type)
         {
             return type.GetProperties(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.SetProperty);
         }
 
         /// <summary>
-        /// Find a specific classes in libraries
+        /// Find a specific classes in all project libraries
         /// </summary>
-        /// <param name="assignedType">type of class to find</param>
+        /// <param name="assignedType">the type of class to find</param>
         /// <param name="onlyConcreteClasses">only concrete classes (not abstract)</param>
         /// <returns>found types of specific class</returns>
         /// <exception cref="Exception"></exception>
@@ -147,7 +130,7 @@ namespace Rat.Domain.Infrastructure
         /// <summary>
         /// Get all Rat project assemblies
         /// </summary>
-        /// <returns>list of all project assemblies</returns>
+        /// <returns>list of all Rat project assemblies</returns>
         protected virtual IList<Assembly> GetAssemblies()
         {
             return AppDomain.CurrentDomain.GetAssemblies()
@@ -182,11 +165,11 @@ namespace Rat.Domain.Infrastructure
         }
 
         /// <summary>
-        /// Determine if type implement open generic
+        /// Determine whether the type implements an open generic
         /// </summary>
         /// <param name="type">input type</param>
         /// <param name="openGeneric">open generic type</param>
-        /// <returns>bool result</returns>
+        /// <returns>the bool result</returns>
         protected virtual bool DoesTypeImplementOpenGeneric(Type type, Type openGeneric)
         {
             try

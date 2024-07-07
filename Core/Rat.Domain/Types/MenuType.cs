@@ -1,7 +1,7 @@
 ﻿namespace Rat.Domain.Types
 {
     /// <summary>
-    /// Defines menu type
+    /// Defines menu types
     /// </summary>
     public enum MenuType
     {

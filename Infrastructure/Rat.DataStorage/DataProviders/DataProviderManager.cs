@@ -25,9 +25,6 @@ namespace Rat.DataStorage.DataProviders
             };
         }
 
-        /// <summary>
-        /// Property to get actual data provider
-        /// </summary>
         public IDbDataProvider DataProvider
         {
             get

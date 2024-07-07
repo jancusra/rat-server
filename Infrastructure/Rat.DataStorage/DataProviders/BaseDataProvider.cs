@@ -20,6 +20,32 @@ namespace Rat.DataStorage.DataProviders
 
         protected abstract DbConnection GetInternalDbConnection(string connectionString);
 
+        public virtual async Task<TEntity> InsertEntityAsync<TEntity>(TEntity entity) where TEntity : TableEntity
+        {
+            using var dataContext = CreateDataConnection();
+            entity.Id = await dataContext.InsertWithInt32IdentityAsync(entity);
+
+            return entity;
+        }
+
+        public virtual async Task UpdateEntityAsync<TEntity>(TEntity entity) where TEntity : TableEntity
+        {
+            using var dataContext = CreateDataConnection();
+            await dataContext.UpdateAsync(entity);
+        }
+
+        public virtual async Task DeleteEntityAsync<TEntity>(TEntity entity) where TEntity : TableEntity
+        {
+            using var dataContext = CreateDataConnection();
+            await dataContext.DeleteAsync(entity);
+        }
+
+        public virtual ITable<TEntity> GetTable<TEntity>() where TEntity : TableEntity
+        {
+            return new DataContext(LinqToDbDataProvider, GetCurrentConnectionString()) { MappingSchema = GetMappingSchema() }
+                .GetTable<TEntity>();
+        }
+
         /// <summary>
         /// Get provider mapping schema
         /// </summary>
@@ -65,35 +91,14 @@ namespace Rat.DataStorage.DataProviders
             return dataConnection;
         }
 
+        /// <summary>
+        /// Create database connection by connection string
+        /// </summary>
+        /// <param name="connectionString">connection string</param>
+        /// <returns>database connection</returns>
         protected virtual DbConnection CreateDbConnection(string connectionString = null)
         {
             return GetInternalDbConnection(!string.IsNullOrEmpty(connectionString) ? connectionString : GetCurrentConnectionString());
-        }
-
-        public virtual async Task<TEntity> InsertEntityAsync<TEntity>(TEntity entity) where TEntity : TableEntity
-        {
-            using var dataContext = CreateDataConnection();
-            entity.Id = await dataContext.InsertWithInt32IdentityAsync(entity);
-
-            return entity;
-        }
-
-        public virtual async Task UpdateEntityAsync<TEntity>(TEntity entity) where TEntity : TableEntity
-        {
-            using var dataContext = CreateDataConnection();
-            await dataContext.UpdateAsync(entity);
-        }
-
-        public virtual async Task DeleteEntityAsync<TEntity>(TEntity entity) where TEntity : TableEntity
-        {
-            using var dataContext = CreateDataConnection();
-            await dataContext.DeleteAsync(entity);
-        }
-
-        public virtual ITable<TEntity> GetTable<TEntity>() where TEntity : TableEntity
-        {
-            return new DataContext(LinqToDbDataProvider, GetCurrentConnectionString()) { MappingSchema = GetMappingSchema() }
-                .GetTable<TEntity>();
         }
 
         /// <summary>

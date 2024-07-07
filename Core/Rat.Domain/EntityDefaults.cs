@@ -1,7 +1,7 @@
 ﻿namespace Rat.Domain
 {
     /// <summary>
-    /// Defined entity defaults to set table column boundaries
+    /// Defined default values for setting table column boundaries
     /// </summary>
     public static class EntityDefaults
     {

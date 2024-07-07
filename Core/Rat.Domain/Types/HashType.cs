@@ -1,7 +1,7 @@
 ﻿namespace Rat.Domain.Types
 {
     /// <summary>
-    /// Define hash algorithm types
+    /// Definition of hash algorithm types
     /// </summary>
     public enum HashType
     {

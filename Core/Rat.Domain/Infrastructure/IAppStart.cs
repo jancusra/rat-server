@@ -3,12 +3,12 @@
 namespace Rat.Domain.Infrastructure
 {
     /// <summary>
-    /// Inteface to define application start
+    /// Interface to define application start
     /// </summary>
     public partial interface IAppStart
     {
         /// <summary>
-        /// Configure services dependency injection
+        /// Service dependency injection configuration
         /// </summary>
         /// <param name="services">collection of services</param>
         void ConfigureServices(IServiceCollection services);

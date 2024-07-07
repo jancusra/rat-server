@@ -7,7 +7,7 @@ namespace Rat.Mappings.CommonTableColumns
     public static class User
     {
         /// <summary>
-        /// Configured metadata to display users in the table
+        /// Configured metadata to display users in a table
         /// </summary>
         /// <returns>list of configured data</returns>
         public static IList<ColumnMetadata> GetMetadata()

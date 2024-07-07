@@ -1,7 +1,7 @@
 ﻿namespace Rat.Domain.Types
 {
     /// <summary>
-    /// Defines possible user role
+    /// Defines possible user roles
     /// </summary>
     public enum RoleType
     {
@@ -16,7 +16,7 @@
         Moderators = 2,
 
         /// <summary>
-        /// REad only access (settings can't be modified)
+        /// Read-only access (settings can't be modified)
         /// </summary>
         FullReadOnlyAccess = 3,
 

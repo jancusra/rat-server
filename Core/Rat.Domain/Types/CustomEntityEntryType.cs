@@ -11,7 +11,7 @@
         Enum,
 
         /// <summary>
-        /// Mapped multiselect (with a relation to another entity)
+        /// Mapped multiselect (with a relationship to another entity)
         /// </summary>
         MappedMultiSelect
     }

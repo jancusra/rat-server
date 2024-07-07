@@ -25,7 +25,7 @@ namespace Rat.Domain.Entities
         public string FullMessage { get; set; }
 
         /// <summary>
-        /// Binding to user if logged
+        /// Binding to user if logged in
         /// </summary>
         public int? UserId { get; set; }
 

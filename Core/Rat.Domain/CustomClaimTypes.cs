@@ -11,7 +11,7 @@
         public const string Id = "id";
 
         /// <summary>
-        /// Determination if user has administration rights
+        /// Determine whether the user has administrative rights
         /// </summary>
         public const string IsAdmin = "isAdmin";
     }

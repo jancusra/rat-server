@@ -1,7 +1,7 @@
 ﻿namespace Rat.Domain.Types
 {
     /// <summary>
-    /// Define type of class for a search by reflection
+    /// Class type definition for reflection search
     /// </summary>
     public enum ClassType
     {

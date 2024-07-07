@@ -1,7 +1,7 @@
 ﻿namespace Rat.Domain.Responses
 {
     /// <summary>
-    /// Defines exception response state
+    /// Defines the status of the exception response
     /// </summary>
     public struct ResponseState
     {

@@ -27,12 +27,12 @@ namespace Rat.Domain.Entities
         public string PasswordSalt { get; set; }
 
         /// <summary>
-        /// Type of used hash
+        /// Type of hash used
         /// </summary>
         public int HashTypeId { get; set; }
 
         /// <summary>
-        /// Date of the password entry creation
+        /// Date the password was created
         /// </summary>
         public DateTime CreatedUTC { get; set; }
     }
