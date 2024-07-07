@@ -9,6 +9,9 @@ using Rat.Domain.Extensions;
 
 namespace Rat.Services
 {
+    /// <summary>
+    /// Common entity validation methods
+    /// </summary>
     public partial class EntityValidationService : IEntityValidationService
     {
         private readonly IEntityService _entityService;

@@ -15,6 +15,9 @@ using Rat.Domain.Types;
 
 namespace Rat.Services
 {
+    /// <summary>
+    /// Methods for various operations with common entities
+    /// </summary>
     public partial class EntityService : IEntityService
     {
         private readonly IAppTypeFinder _appTypeFinder;
@@ -136,6 +139,15 @@ namespace Rat.Services
             return Type.GetType(typeEntityData);
         }
 
+        /// <summary>
+        /// Get result from invoked method
+        /// </summary>
+        /// <param name="typeOfSource">the type of source (IRepository)</param>
+        /// <param name="methodName">repository method name</param>
+        /// <param name="sourceForInvoke">invoke source (_repository)</param>
+        /// <param name="invokeParameters">parameters for invoked method</param>
+        /// <param name="methodGenericType">generic type for the invoked method</param>
+        /// <returns>model returned from invoked method</returns>
         private async Task<dynamic> GetResultFromInvokedMethodAsync(
             Type typeOfSource,
             string methodName,
@@ -168,6 +180,12 @@ namespace Rat.Services
             }
         }
 
+        /// <summary>
+        /// Get entity by ID (by calling invoked method)
+        /// </summary>
+        /// <param name="entityType">entity type</param>
+        /// <param name="entityId">entity ID</param>
+        /// <returns>final table entity</returns>
         private async Task<TableEntity> GetEntityByIdAsync(Type entityType, int entityId)
         {
             return await GetResultFromInvokedMethodAsync(
@@ -178,6 +196,12 @@ namespace Rat.Services
                 entityType) as TableEntity;
         }
 
+        /// <summary>
+        /// Get all entities by type (by calling invoked method)
+        /// </summary>
+        /// <typeparam name="T">the type of returned entities</typeparam>
+        /// <param name="entityType">the type of entity</param>
+        /// <returns>enumerable of all entities</returns>
         private async Task<IEnumerable<T>> GetAllEntitiesAsync<T>(Type entityType)
         {
             return await GetResultFromInvokedMethodAsync(
@@ -188,6 +212,13 @@ namespace Rat.Services
                 entityType) as IEnumerable<T>;
         }
 
+        /// <summary>
+        /// Insert or update entity in the database (by calling invoked method)
+        /// </summary>
+        /// <param name="entityType">type of the entity</param>
+        /// <param name="entityId">entity ID (if zero perform insert operation)</param>
+        /// <param name="data">entity data (column names and values)</param>
+        /// <returns>final inserted/updated entity</returns>
         private async Task<TableEntity> PrepareAndInsertOrUpdateEntityAsync(Type entityType, int entityId, Dictionary<string, object> data)
         {
             var methodName = entityId > default(int) ? nameof(IRepository.UpdateAsync) : nameof(IRepository.InsertAsync);
@@ -207,6 +238,11 @@ namespace Rat.Services
             return entity;
         }
 
+        /// <summary>
+        /// Set entity properties by data dictionary
+        /// </summary>
+        /// <param name="entity">prepared entity</param>
+        /// <param name="data">entity data to set</param>
         private void SetEntityPropertiesByData(TableEntity entity, Dictionary<string, object> data)
         {
             var entityProperties = entity.GetType().GetProperties();
@@ -225,6 +261,12 @@ namespace Rat.Services
             }
         }
 
+        /// <summary>
+        /// Save additional records for the entity according to the configured metadata
+        /// </summary>
+        /// <param name="entityType">the type of entity</param>
+        /// <param name="entityId">entity ID</param>
+        /// <param name="data">entity data</param>
         private async Task SaveEntityAdditionsByMetadata(Type entityType, int entityId, Dictionary<string, object> data)
         {
             var expandingMetadata = GetExpandingMetadataByEntityType(entityType);
@@ -285,6 +327,12 @@ namespace Rat.Services
             }
         }
 
+        /// <summary>
+        /// Prepare entity DTO model by raw table entity
+        /// </summary>
+        /// <param name="entityType">the type of entity</param>
+        /// <param name="entity">existing table entity (prepare new if not defined)</param>
+        /// <returns>entity properties DTO model</returns>
         private async Task<IList<EntityEntryDto>> PrepareEntityEntriesDtoByEntityAsync(Type entityType, TableEntity entity = null)
         {
             var entriesMetadata = GetMetadataByEntityAndClassType<EntityEntryDto>(entityType, ClassType.CommonEntityEntries);
@@ -374,6 +422,12 @@ namespace Rat.Services
             return entityEntries;
         }
 
+        /// <summary>
+        /// Extending the DTO properties of a entity with other properties configured in the code
+        /// </summary>
+        /// <param name="entityType">the type of entity</param>
+        /// <param name="entriesMetadata">entity entries metadata</param>
+        /// <returns>extended DTO properties</returns>
         private IList<EntityEntryDto> GetExpandingMetadataByEntityType(
             Type entityType, 
             IList<EntityEntryDto> entriesMetadata = null)
@@ -387,6 +441,11 @@ namespace Rat.Services
             return entriesMetadata.Where(x => !entityPropNames.Contains(x.Name)).ToList();
         }
 
+        /// <summary>
+        /// Get all named entries by entity name
+        /// </summary>
+        /// <param name="entityName">entity name</param>
+        /// <returns>dictionary: entity ID and corresponding entity name</returns>
         private async Task<Dictionary<int, string>> GetAllNamedByEntityNameAsync(string entityName)
         {
             var optionsEntityType = GetTableEntityTypeByName(entityName);
@@ -404,11 +463,25 @@ namespace Rat.Services
             return namedEntries;
         }
 
+        /// <summary>
+        /// Get mapping table by primary/secondary table names
+        /// </summary>
+        /// <param name="primaryEntityName">primary entity name</param>
+        /// <param name="secondaryEntityName">secondary entity name</param>
+        /// <returns>mapping table name</returns>
         private string GetMappingTableName(string primaryEntityName, string secondaryEntityName)
         {
             return $"{primaryEntityName}{secondaryEntityName}{EntityDefaults.MappingTableNamePostfix}";
         }
 
+        /// <summary>
+        /// Get mapped object IDs by primary/secondary entity and primary entity ID
+        /// </summary>
+        /// <param name="primaryEntityName">primary entity name</param>
+        /// <param name="secondaryEntityName">secondary entity name</param>
+        /// <param name="primaryEntityId">primary entity ID</param>
+        /// <param name="mappingsData">existing mappings data (used as source if defined)</param>
+        /// <returns>list of map IDs</returns>
         private async Task<List<int>> GetMapObjectIdsByEntityNamesAndPrimaryEntityIdAsync(
             string primaryEntityName,
             string secondaryEntityName,
@@ -422,6 +495,14 @@ namespace Rat.Services
             return entityMaps.Select(x => GetIntValueByPropertyName(x, objectIdColumnName)).ToList();
         }
 
+        /// <summary>
+        /// Get mapped entities by primary/secondary entity and primary entity ID
+        /// </summary>
+        /// <param name="primaryEntityName">primary entity name</param>
+        /// <param name="secondaryEntityName">secondary entity name</param>
+        /// <param name="primaryEntityId">primary entity ID</param>
+        /// <param name="mappingsData">existing mappings data (used as source if defined)</param>
+        /// <returns>list of mapped entities</returns>
         private async Task<IList<TableEntity>> GetMapsByEntityNamesAndPrimaryEntityIdAsync(
             string primaryEntityName,
             string secondaryEntityName,
@@ -448,6 +529,11 @@ namespace Rat.Services
             return finalMaps;
         }
 
+        /// <summary>
+        /// Prepare table columns by metadata configured in the code
+        /// </summary>
+        /// <param name="entityType">the type of entity</param>
+        /// <returns>final list of column metadata</returns>
         private async Task<IList<ColumnMetadata>> PrepareColumnsMetadataByEntityAsync(Type entityType)
         {
             var entriesMetadata = GetMetadataByEntityAndClassType<EntityEntryDto>(entityType, ClassType.CommonEntityEntries);
@@ -526,12 +612,26 @@ namespace Rat.Services
             return columns;
         }
 
+        /// <summary>
+        /// Determine whether an entity type (interface) is derived from a specific entity type and his property
+        /// </summary>
+        /// <typeparam name="T">entity interface type (e.g. IAuditable, INamed etc.)</typeparam>
+        /// <param name="entityType">the type of entity</param>
+        /// <param name="entityProperty">specific entity property</param>
+        /// <returns>the bool result</returns>
         private bool IsEntityPropertyDerivedByEntityType<T>(Type entityType, PropertyInfo entityProperty)
         {
             return typeof(T).IsAssignableFrom(entityType)
                 && typeof(T).GetProperties().FirstOrDefault(x => x.Name == entityProperty.Name) != null;
         }
 
+        /// <summary>
+        /// Get configured metadata by entity and class type
+        /// </summary>
+        /// <typeparam name="T">final metadata format</typeparam>
+        /// <param name="entityType">the type of entity</param>
+        /// <param name="classType">the type of class</param>
+        /// <returns>final list of metadata</returns>
         private IList<T> GetMetadataByEntityAndClassType<T>(Type entityType, ClassType classType) where T : BaseEntryDto
         {
             var metadataType = _appTypeFinder.GetAssemblyQualifiedNameByClass(entityType.Name, classType);
@@ -545,11 +645,22 @@ namespace Rat.Services
             return new List<T>();
         }
 
+        /// <summary>
+        /// Extract int value form property object
+        /// </summary>
+        /// <param name="source">input object</param>
+        /// <param name="propertyName">property name</param>
+        /// <returns>extracted int value</returns>
         private int GetIntValueByPropertyName(object source, string propertyName)
         {
             return (int)source.GetType().GetProperty(propertyName).GetValue(source, null);
         }
 
+        /// <summary>
+        /// Convert enumerable dynamic data to dictionary string/object
+        /// </summary>
+        /// <param name="dynamicData">dynamic data to convert</param>
+        /// <returns>final dictionary string (property name)/object</returns>
         private IList<IDictionary<string, object>> ConvertDynamicDataToDictionary(IEnumerable<dynamic> dynamicData)
         {
             var dictionaryData = new List<IDictionary<string, object>>();
