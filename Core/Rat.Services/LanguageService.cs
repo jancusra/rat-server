@@ -6,6 +6,9 @@ using Rat.Domain.Entities;
 
 namespace Rat.Services
 {
+    /// <summary>
+    /// Methods working with language entity and other features
+    /// </summary>
     public partial class LanguageService : ILanguageService
     {
         private readonly IRepository _repository;

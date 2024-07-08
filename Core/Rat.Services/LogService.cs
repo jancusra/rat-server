@@ -9,6 +9,9 @@ using Rat.Domain.Types;
 
 namespace Rat.Services
 {
+    /// <summary>
+    /// Methods working with log entity and other features
+    /// </summary>
     public partial class LogService : ILogService
     {
         private readonly IRepository _repository;

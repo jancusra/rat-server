@@ -6,6 +6,9 @@ using Rat.Domain.Types;
 
 namespace Rat.Services
 {
+    /// <summary>
+    /// Methods for providing secure hashing algorithms
+    /// </summary>
     public partial class HashingService : IHashingService
     {
         public virtual string GenerateSalt(int size = 128)
@@ -31,6 +34,14 @@ namespace Rat.Services
             }
         }
 
+        /// <summary>
+        /// Create a hash according to a specific algorithm
+        /// </summary>
+        /// <param name="hashType">the type of hash</param>
+        /// <param name="inputString">input string (usually password)</param>
+        /// <param name="withSalt">should be hash prepared with a salt</param>
+        /// <param name="salt">the hash salt</param>
+        /// <returns>final hash output</returns>
         private string GetHashByAlgorithm(HashType hashType, string inputString, bool withSalt = false, string salt = null)
         {
             if (withSalt)
@@ -49,6 +60,12 @@ namespace Rat.Services
             return Convert.ToBase64String(hashBytes);
         }
 
+        /// <summary>
+        /// Get Pbkdf2Hash from input string
+        /// </summary>
+        /// <param name="inputString">input string</param>
+        /// <param name="salt">the hash salt</param>
+        /// <returns>GetPbkdf2Hash hashing output</returns>
         private string GetPbkdf2Hash(string inputString, string salt = null)
         {
             return Convert.ToBase64String(KeyDerivation.Pbkdf2(

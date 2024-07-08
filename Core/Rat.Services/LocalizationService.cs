@@ -7,6 +7,9 @@ using Rat.Domain.Entities;
 
 namespace Rat.Services
 {
+    /// <summary>
+    /// Methods working with localization entity and other features
+    /// </summary>
     public partial class LocalizationService : ILocalizationService
     {
         private readonly IRepository _repository;
@@ -42,6 +45,11 @@ namespace Rat.Services
             return await _repository.Table<Localization>().Where(x => x.LanguageId == langId).ToListAsync();
         }
 
+        /// <summary>
+        /// Get default language ID if ID is not specified
+        /// </summary>
+        /// <param name="languageId">language ID</param>
+        /// <returns>final language ID</returns>
         private async Task<int> GetLanguageIdAsync(int languageId)
         {
             if (languageId > default(int))

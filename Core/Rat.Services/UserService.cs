@@ -13,6 +13,9 @@ using Rat.Domain.Types;
 
 namespace Rat.Services
 {
+    /// <summary>
+    /// Methods working with user entity and other features
+    /// </summary>
     public partial class UserService : IUserService
     {
         private readonly IHashingService _hashingService;
@@ -31,9 +34,6 @@ namespace Rat.Services
             _httpContextAccessor = httpContextAccessor;
             _userOptions = userOptions;
         }
-
-        private async Task<UserPassword> GetUserPasswordByUserIdAsync(int userId)
-            => await _repository.Table<UserPassword>().FirstOrDefaultAsync(x => x.UserId == userId);
 
         public virtual async Task<User> GetUserByEmailAsync(string email)
             => await _repository.Table<User>().FirstOrDefaultAsync(x => x.Email == email);
@@ -111,5 +111,13 @@ namespace Rat.Services
 
             return true;
         }
+
+        /// <summary>
+        /// Get database password by user ID
+        /// </summary>
+        /// <param name="userId">user ID</param>
+        /// <returns>the password belongs to the user</returns>
+        private async Task<UserPassword> GetUserPasswordByUserIdAsync(int userId)
+            => await _repository.Table<UserPassword>().FirstOrDefaultAsync(x => x.UserId == userId);
     }
 }
