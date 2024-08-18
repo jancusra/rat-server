@@ -1,5 +1,5 @@
 # Rat.Api - Web server API template (my app architecture)
-### [ NOT MAINTAINED CODE (ONLY FOR DEMONSTRATION) ]
+#### [ FULLY FUNCTIONAL, BUT NOT MAINTAINED CODE (ONLY FOR DEMONSTRATION) ]
 
 [Here is client app for this server](https://github.com/jancusra/rat-client)
 
