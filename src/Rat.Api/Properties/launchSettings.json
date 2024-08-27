@@ -22,7 +22,7 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "api/home/",
-      "applicationUrl": "http://localhost:5214",
+      "applicationUrl": "http://localhost:47050",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
